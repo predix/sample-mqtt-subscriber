@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="box col-md-6 col-md-offset-3">
+				<h1 th:inline="text">Sample MQTT Subscriber</h1>
+				<h2 th:text="${connectionStatus}"></h2>
+			</div>
+		</div>
+	</div>
+	<div>
+		<form action="#" th:action="@{/}" th:object="${brokerConfig}"
+			method="post">
+			<table>
+				<tr>
+					<th>Host Name</th>
+					<th>Port</th>
+				</tr>
+				<tr>
+					<td><input type="text" th:field="*{hostName}" /></td>
+					<td th:if="${#fields.hasErrors('hostName')}"
+						th:errors="*{hostName}">HostName Error</td>
+					<td><input type="text" th:field="*{port}" /></td>
+					<td th:if="${#fields.hasErrors('port')}" th:errors="*{port}">Port
+						Error</td>
+				</tr>
+				<tr>
+					<td><button type="submit">Connect</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

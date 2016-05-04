@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="box col-md-6 col-md-offset-3">
+				<h1 th:inline="text">Sample MQTT Subscriber</h1>
+				<h2 th:text="${connectionStatus}"></h2>
+				<form action="#" th:action="@{/showmessages}"
+					method="post">
+					<button type="submit">Disconnect</button>
+				</form>
+				<p th:text="${messages}"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
