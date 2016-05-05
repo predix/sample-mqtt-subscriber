@@ -69,10 +69,10 @@ public class MainController {
 	public String showMessages(Model model) {
 		LOGGER.info("Serving show messages page");
 		model.addAttribute("connectionStatus", getConnectionStatus());
-		model.addAttribute("messages",this.sub.messages());
+		model.addAttribute("messages", this.sub.messages());
 		return "showmessages";
 	}
-	
+
 	@RequestMapping(value = "/showmessages", method = RequestMethod.POST)
 	public String disconnect(Model model) {
 		LOGGER.info("Disconnecting from broker");

@@ -27,6 +27,8 @@ public class AccelerometerSubscriber implements MqttCallback {
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(AccelerometerSubscriber.class);
 
 	private MqttClient mqttClient;
+	
+	private MessageListener listener;
 
 	public AccelerometerSubscriber() {
 		this.setTopic("accelerometer");
@@ -44,6 +46,10 @@ public class AccelerometerSubscriber implements MqttCallback {
 		mqttClient.subscribe(getTopic(), 0);
 		LOGGER.info("Subscribed to {}", getTopic());
 	}
+	
+	public void setMessageListener(MessageListener listener) {
+		this.listener = listener;
+	}
 
 	@Override
 	public void connectionLost(Throwable cause) {
@@ -58,6 +64,9 @@ public class AccelerometerSubscriber implements MqttCallback {
 				this.queue.remove();
 			}
 			this.queue.add(message.toString());
+			if (this.listener != null) {
+				this.listener.messageReceived(message.toString());
+			}
 		}
 	}
 
