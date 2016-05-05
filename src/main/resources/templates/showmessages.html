@@ -1,36 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
-<script type="text/javascript">
-	var stompClient = null;
-
-	function setConnected(connected) {
-		document.getElementById('connect').disabled = connected;
-		document.getElementById('disconnect').disabled = !connected;
-		document.getElementById('conversationDiv').style.visibility = connected ? 'visible'
-				: 'hidden';
-		document.getElementById('response').innerHTML = '';
-	}
-
-	function connect() {
-		var socket = new SockJS('/accelerometer');
-		socket.onopen = function() {
-			Console.log("Connected!")
-		};
-		socket.onmessage = function(message){
-			showMessage(message);
-		}		
-	}
-
-	function showMessage(message) {
-		var messages = document.getElementById('messages');
-		var item = document.createElement('li');
-		item.appendChild(document.createTextNode(message.data))
-		messages.appendChild(item);
-	} 
-</script>
 </head>
 <body onload="connect()">
+  <div id="randomDataChart"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="box col-md-6 col-md-offset-3">
@@ -44,4 +16,10 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="resources/jquery.js" />
+<script type="text/javascript" src="resources/sockjs.js" />
+<script type="text/javascript" src="resources/highcharts.js" />
+<script type="text/javascript" src="resources/stomp.js" />
+<script type="text/javascript" src="resources/application.js" />
+<script type="text/javascript" src="resources/sockjs.min.js" />
 </html>
