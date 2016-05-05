@@ -1,25 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css"></link>  
 </head>
-<body onload="connect()">
-  <div id="randomDataChart"></div>
-	<div class="container-fluid">
+<body onload="connect()">  
+	<div class="container">
 		<div class="row">
-			<div class="box col-md-6 col-md-offset-3">
-				<h1 th:inline="text">Sample MQTT Subscriber</h1>
-				<h2 th:text="${connectionStatus}"></h2>
-				<form action="#" th:action="@{/showmessages}" method="post">
-					<button type="submit">Disconnect</button>
-				</form>
-				<ul id="messages"></ul>
+			<div class="box col-md-6 col-md-offset-3">				
+				<div><h1><span class="label label-success">Sample MQTT Subscriber</span></h1></div>
+				<br></br>								
 			</div>
 		</div>
-	</div>
+		<div id="randomDataChart"></div>
+		<br></br>
+		<form action="#" th:action="@{/showmessages}" method="post">
+			<button type="submit" class="btn btn-danger">Disconnect</button>
+		</form>
+	</div>	
 </body>
-<script type="text/javascript" src="resources/jquery.js" />
-<script type="text/javascript" src="resources/sockjs.js" />
-<script type="text/javascript" src="resources/highcharts.js" />
-<script type="text/javascript" src="resources/stomp.js" />
-<script type="text/javascript" src="resources/application.js" />
-<script type="text/javascript" src="resources/sockjs.min.js" />
+<script type="text/javascript" src="resources/js/jquery.js"></script>
+<script type="text/javascript" src="resources/js/highcharts.js" ></script>
+<script type="text/javascript" src="resources/js/application.js" ></script>
+<script type="text/javascript" src="resources/js/sockjs.min.js" ></script>
 </html>
