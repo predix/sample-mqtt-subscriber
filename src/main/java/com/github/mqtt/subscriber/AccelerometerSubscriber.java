@@ -36,14 +36,14 @@ public class AccelerometerSubscriber implements MqttCallback {
 
 	public void connect(MQTTBrokerConfig config) throws MqttException {
 		this.connectionString = config.getConnectionString();
-		mqttClient = new MqttClient(this.connectionString, "client1");
+		this.mqttClient = new MqttClient(this.connectionString, "client1");
 		MqttConnectOptions connOpts = new MqttConnectOptions();
 		connOpts.setCleanSession(true);
 		LOGGER.info("Connecting to broker: {}", this.connectionString);
-		mqttClient.connect(connOpts);
+		this.mqttClient.connect(connOpts);
 		LOGGER.info("Connected to {}", this.connectionString);
-		mqttClient.setCallback(this);
-		mqttClient.subscribe(getTopic(), 0);
+		this.mqttClient.setCallback(this);
+		this.mqttClient.subscribe(getTopic(), 0);
 		LOGGER.info("Subscribed to {}", getTopic());
 	}
 	
@@ -80,7 +80,7 @@ public class AccelerometerSubscriber implements MqttCallback {
 	}
 
 	public String getConnectionString() {
-		return connectionString;
+		return this.connectionString;
 	}
 
 	public void setConnectionString(String connectionString) {
@@ -88,7 +88,7 @@ public class AccelerometerSubscriber implements MqttCallback {
 	}
 
 	public String getTopic() {
-		return topic;
+		return this.topic;
 	}
 
 	public void setTopic(String topic) {

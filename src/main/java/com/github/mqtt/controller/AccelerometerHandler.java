@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -26,6 +27,7 @@ public class AccelerometerHandler extends TextWebSocketHandler implements Messag
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		LOGGER.info("Websocket session established");
 		this.session = session;
 		this.sub.setMessageListener(this);
 	}
@@ -39,10 +41,19 @@ public class AccelerometerHandler extends TextWebSocketHandler implements Messag
 	public void messageReceived(String message) {
 		try {
 			LOGGER.info("Send new message to client {}", message);
-			this.session.sendMessage(new TextMessage(message));
-		} catch (IOException e) {
+			if (this.session.isOpen()) {
+				this.session.sendMessage(new TextMessage(message));
+			} else {
+				LOGGER.warn("Session is closed!");
+			}
+		} catch (Exception e) {
 			LOGGER.error("Error when sending message", e);
 		}
+	}
+	
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
+		LOGGER.info("Websocket session is closed {}", closeStatus);
 	}
 
 }
